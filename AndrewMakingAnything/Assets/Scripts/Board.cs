@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class Board : MonoBehaviour
 {
     public GameObject mCellPrefab;
-    public Color cellColorOdd;
-    public Color cellColorEven;
+    public Color cellColorWhite;
+    public Color cellColorBlack;
 
     [HideInInspector]
     public Cell[,] mAllCells = new Cell[8, 8];
@@ -26,8 +26,8 @@ public class Board : MonoBehaviour
 
                 bool isEven = (x + y) % 2 == 0;
                 mAllCells[x, y].GetComponent<Image>().color = isEven
-                    ? cellColorOdd
-                    : cellColorEven;
+                    ? cellColorWhite
+                    : cellColorBlack;
             }
         }
     }
