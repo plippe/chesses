@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PieceManager : MonoBehaviour
 {
+    [HideInInspector]
+    public bool mIsKingAlive = true;
+
     public GameObject mPiecePrefab;
 
     public Color pieceColorWhite;
@@ -25,6 +28,8 @@ public class PieceManager : MonoBehaviour
 
         PlacePieces(1, 0, mWhitePieces, board);
         PlacePieces(6, 7, mBlackPieces, board);
+
+        SwitchSides(Color.black);
     }
 
     public List<BasePiece> CreatePieces(Color teamColor, Color spriteColor, Board board)
@@ -57,5 +62,37 @@ public class PieceManager : MonoBehaviour
             pieces[i].Place(board.mAllCells[i, pawnRow]);
             pieces[i + 8].Place(board.mAllCells[i, royaltyRow]);
         }
+    }
+
+    private void SetInteractive(List<BasePiece> allPieces, bool value)
+    {
+        foreach (BasePiece piece in allPieces)
+            piece.enabled = value;
+    }
+
+    public void SwitchSides(Color color)
+    {
+        if (!mIsKingAlive)
+        {
+            ResetPieces();
+
+            mIsKingAlive = true;
+
+            color = Color.white;
+        }
+
+        bool isBlackTurn = color == Color.white;
+
+        SetInteractive(mWhitePieces, !isBlackTurn);
+        SetInteractive(mBlackPieces, isBlackTurn);
+    }
+
+    public void ResetPieces()
+    {
+        foreach (BasePiece piece in mWhitePieces)
+            piece.Reset();
+
+        foreach (BasePiece piece in mBlackPieces)
+            piece.Reset();
     }
 }

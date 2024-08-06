@@ -1,6 +1,14 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum CellState
+{
+    Friendly,
+    Enemy,
+    Free,
+    OutOfBounds,
+}
+
 public class Board : MonoBehaviour
 {
     public GameObject mCellPrefab;
@@ -32,4 +40,22 @@ public class Board : MonoBehaviour
         }
     }
 
+    public CellState ValidateCell(int targetX, int targetY, BasePiece checkingPiece)
+    {
+        if (targetX < 0 || targetX > 7)
+            return CellState.OutOfBounds;
+
+        if (targetY < 0 || targetY > 7)
+            return CellState.OutOfBounds;
+
+        Cell targetCell = mAllCells[targetX, targetY];
+
+        if (targetCell.mCurrentPiece == null)
+            return CellState.Free;
+
+        if (targetCell.mCurrentPiece.mColor == checkingPiece.mColor)
+            return CellState.Friendly;
+
+        return CellState.Enemy;
+    }
 }
