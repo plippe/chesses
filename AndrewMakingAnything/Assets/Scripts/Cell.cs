@@ -11,6 +11,7 @@ public class Cell : MonoBehaviour
     public Board mBoard = null;
     [HideInInspector]
     public RectTransform mRectTransform = null;
+
     [HideInInspector]
     public BasePiece mCurrentPiece = null;
 
@@ -20,5 +21,10 @@ public class Cell : MonoBehaviour
         mBoard = newBoard;
 
         mRectTransform = GetComponent<RectTransform>();
+    }
+
+    public void RemovePiece()
+    {
+        mCurrentPiece?.Kill();
     }
 }
