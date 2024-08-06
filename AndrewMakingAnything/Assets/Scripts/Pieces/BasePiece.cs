@@ -44,7 +44,7 @@ public class BasePiece : EventTrigger
         Place(mOriginalCell);
     }
 
-    public void Kill()
+    public virtual void Kill()
     {
         mCurrentCell.mCurrentPiece = null;
         gameObject.SetActive(false);
@@ -64,10 +64,14 @@ public class BasePiece : EventTrigger
             switch (cellState)
             {
                 case CellState.Free:
+                    mHighlightedCells.Add(mCurrentCell.mBoard.mAllCells[currentX, currentY]);
+                    continue;
                 case CellState.Enemy:
                     mHighlightedCells.Add(mCurrentCell.mBoard.mAllCells[currentX, currentY]);
                     break;
             }
+
+            break;
         }
     }
 
@@ -100,7 +104,7 @@ public class BasePiece : EventTrigger
         mHighlightedCells.Clear();
     }
 
-    public void Move()
+    public virtual void Move()
     {
         mTargetCell.RemovePiece();
 
