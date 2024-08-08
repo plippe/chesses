@@ -14,6 +14,7 @@ public class PieceManager : MonoBehaviour
 
     private List<BasePiece> mWhitePieces = null;
     private List<BasePiece> mBlackPieces = null;
+    private List<BasePiece> mPromotedPieces = new List<BasePiece>();
 
     private Type[] mPieceTypeInOrder = new Type[16]
     {
@@ -38,21 +39,26 @@ public class PieceManager : MonoBehaviour
 
         for (int i = 0; i < mPieceTypeInOrder.Length; i++)
         {
-            GameObject newPieceObject = Instantiate(mPiecePrefab);
-            newPieceObject.transform.SetParent(transform);
-
-            newPieceObject.transform.localScale = new Vector3(1, 1, 1);
-            newPieceObject.transform.localRotation = Quaternion.identity;
-
             Type pieceType = mPieceTypeInOrder[i];
 
-            BasePiece newPiece = (BasePiece)newPieceObject.AddComponent(pieceType);
+            BasePiece newPiece = CreatePiece(pieceType);
             newPieces.Add(newPiece);
 
             newPiece.Setup(teamColor, spriteColor, this);
         }
 
         return newPieces;
+    }
+
+    private BasePiece CreatePiece(Type pieceType)
+    {
+        GameObject newPieceObject = Instantiate(mPiecePrefab);
+        newPieceObject.transform.SetParent(transform);
+
+        newPieceObject.transform.localScale = new Vector3(1, 1, 1);
+        newPieceObject.transform.localRotation = Quaternion.identity;
+
+        return (BasePiece)newPieceObject.AddComponent(pieceType);
     }
 
     private void PlacePieces(int pawnRow, int royaltyRow, List<BasePiece> pieces, Board board)
@@ -78,21 +84,49 @@ public class PieceManager : MonoBehaviour
 
             mIsKingAlive = true;
 
-            color = Color.white;
+            color = Color.black;
         }
 
         bool isBlackTurn = color == Color.white;
 
         SetInteractive(mWhitePieces, !isBlackTurn);
         SetInteractive(mBlackPieces, isBlackTurn);
+
+        foreach (BasePiece piece in mPromotedPieces)
+        {
+            bool isBlackPiece = piece.mColor != Color.white;
+            bool isPartOfTeam = isBlackPiece ? isBlackTurn : !isBlackTurn;
+
+            piece.enabled = isPartOfTeam;
+        }
     }
 
     public void ResetPieces()
     {
+        foreach (BasePiece piece in mPromotedPieces)
+        {
+            piece.Kill();
+            Destroy(piece.gameObject);
+        }
+
         foreach (BasePiece piece in mWhitePieces)
             piece.Reset();
 
         foreach (BasePiece piece in mBlackPieces)
             piece.Reset();
     }
+
+    public void PromotePiece(Pawn pawn, Cell cell, Color teamColor, Color spriteColor)
+    {
+        pawn.Kill();
+
+        BasePiece promotedPiece = CreatePiece(typeof(Queen));
+        promotedPiece.Setup(teamColor, spriteColor, this);
+
+        promotedPiece.Place(cell);
+
+        mPromotedPieces.Add(promotedPiece);
+    }
+
+
 }
