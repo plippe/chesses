@@ -3,8 +3,6 @@ using UnityEngine.UI;
 
 public class Pawn : BasePiece
 {
-    private bool mIsFirstMove = true;
-
     override public void Setup(Color newTeamColor, Color32 newSpriteColor, PieceManager newPieceManager)
     {
         base.Setup(newTeamColor, newSpriteColor, newPieceManager);
@@ -69,7 +67,5 @@ public class Pawn : BasePiece
     public override void Kill()
     {
         base.Kill();
-
-        mIsFirstMove = true;
     }
 }

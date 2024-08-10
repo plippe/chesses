@@ -7,6 +7,7 @@ public class BasePiece : EventTrigger
 {
     [HideInInspector]
     public Color mColor = Color.clear;
+    public bool mIsFirstMove = true;
 
     protected Cell mOriginalCell = null;
     protected Cell mCurrentCell = null;
@@ -28,7 +29,7 @@ public class BasePiece : EventTrigger
         mRectTransform = GetComponent<RectTransform>();
     }
 
-    public void Place(Cell newCell)
+    public virtual void Place(Cell newCell)
     {
         mCurrentCell = newCell;
         mOriginalCell = newCell;
@@ -38,7 +39,7 @@ public class BasePiece : EventTrigger
         gameObject.SetActive(true);
     }
 
-    public virtual void Reset()
+    public void Reset()
     {
         Kill();
         Place(mOriginalCell);
