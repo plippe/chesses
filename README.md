@@ -5,3 +5,4 @@
 - [Complete Chess Game Tutorial](https://www.youtube.com/playlist?list=PLmcbjnHce7SeAUFouc3X9zqXxiPbCz8Zp) by [Mercenary Camp](https://www.youtube.com/@N3KMercenaryCamp)
 - [Full Games](https://www.youtube.com/playlist?list=PLMQr0t2lnabATVpcjT0X_dWCvxawlLuEY) by [GameDevChef](https://www.youtube.com/@GameDevChef)
 - [Unity Chess Tutorial](https://www.youtube.com/watch?v=2dHzMsnKmtM) by [ZerefGD](https://www.youtube.com/@zerefgd)
+- [Chess Game Tutorial](https://www.youtube.com/playlist?list=PLLH3mUGkfFCWAaF2bkUcmg-b1fZiKjXzG) by [N3K EN](https://www.youtube.com/@n3ken)
