@@ -185,7 +185,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6340952829374742874, guid: 81136385a28064c2fa339b33423d3f2d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1522837736}
   m_SourcePrefab: {fileID: 100100000, guid: 81136385a28064c2fa339b33423d3f2d, type: 3}
 --- !u!114 &315806930 stripped
 MonoBehaviour:
@@ -476,6 +479,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1522837733 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6340952829374742874, guid: 81136385a28064c2fa339b33423d3f2d, type: 3}
+  m_PrefabInstance: {fileID: 48167757}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1522837736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522837733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60800ef966ff74394a6eee4514b87ba6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cursorTexture: {fileID: 2800000, guid: 690bc024e209b456ea515a04dd146510, type: 3}
 --- !u!1001 &1551689281
 PrefabInstance:
   m_ObjectHideFlags: 0
